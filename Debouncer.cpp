@@ -19,8 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "Debouncer.h"
 
-const uint32_t default_thrPressed = 5;
-const uint32_t default_thrReleased = 5;
+const uint32_t default_thrPressed  = 5; // ticks
+const uint32_t default_thrReleased = 5; // ticks
+
+const uint32_t default_updateTime    = 5;   // ms
+const uint32_t default_keyRepeatRate = 30;  // ms
+const uint32_t default_keyDelay      = 500; // ms
 
 Debouncer::Debouncer(void)
 {
@@ -31,6 +35,10 @@ Debouncer::Debouncer(void)
     lastPressedCount = 0;
     thrPressed  = default_thrPressed;
     thrReleased = default_thrReleased;
+
+    updateTime    = default_updateTime;
+    keyDelay      = default_keyDelay;
+    keyRepeatRate = default_keyRepeatRate;
 }
 
 Debouncer::~Debouncer(void)
@@ -117,4 +125,32 @@ uint32_t Debouncer::GetCurrentPressLength(void)
 uint32_t Debouncer::GetLastPressLength(void)
 {
     return lastPressedCount;
+}
+
+void Debouncer::SetUpdateTime(uint32_t updateTimeIn)
+{
+    updateTime = updateTimeIn;
+}
+
+void Debouncer::SetKeyRepeat(uint32_t keyDelayIn, uint32_t keyRepeatRateIn)
+{
+    keyDelay = keyDelayIn;
+    keyRepeatRate = keyRepeatRateIn;
+}
+
+uint32_t Debouncer::GetCurrentPressCount(void)
+{
+    uint32_t res;
+    res = updateTime * counterPressed;
+
+    if (res < keyDelay) {
+        return 0;
+    }
+
+    if (keyRepeatRate == 0) {
+        return 1;
+    }
+
+    res -= keyDelay;
+    return 1 + res / keyRepeatRate;
 }

@@ -90,6 +90,25 @@ public:
      */
     uint32_t GetLastPressLength(void);
 
+    /**
+     * Sets the time betwwen updates, in milliseconds
+     */
+    void SetUpdateTime(uint32_t updateTime);
+
+    /**
+     * Set key repeat parameters
+     *
+     * @param keyDelay      the delay, in milliseconds, before first repeat;
+     * @param keyRepeatRate the rate, in milliseconds, for repeating keys. If keyRepeatRate is 0
+     *                      key repeat is disabled.
+     */
+    void SetKeyRepeat(uint32_t keyDelay, uint32_t keyRepeatRate);
+
+    /**
+     * For a pressed button, returns the number of presses considering repeat parameters
+     */
+    uint32_t GetCurrentPressCount(void);
+
 protected:
     bool pressed, oldPressed;
     uint32_t counterPressed;
@@ -97,6 +116,10 @@ protected:
     uint32_t lastPressedCount;
     uint32_t thrPressed;
     uint32_t thrReleased;
+
+    uint32_t updateTime;
+    uint32_t keyDelay;
+    uint32_t keyRepeatRate;
 };
 
 #endif
