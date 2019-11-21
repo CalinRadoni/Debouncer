@@ -19,12 +19,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "Debouncer.h"
 
-const uint32_t default_thrPressed  = 5; // ticks
-const uint32_t default_thrReleased = 5; // ticks
+#define USE_Kconfig
 
-const uint32_t default_updateTime    = 5;   // ms
-const uint32_t default_keyRepeatRate = 30;  // ms
-const uint32_t default_keyDelay      = 500; // ms
+#ifdef USE_Kconfig
+    #include "sdkconfig.h"
+
+    const uint32_t default_thrPressed    = CONFIG_DEBOUNCER_thrPressed;    // ticks
+    const uint32_t default_thrReleased   = CONFIG_DEBOUNCER_thrReleased;   // ticks
+    const uint32_t default_updateTime    = CONFIG_DEBOUNCER_updateTime;    // ms
+    const uint32_t default_minKeyPress   = CONFIG_DEBOUNCER_minKeyPress;   // ms
+    const uint32_t default_keyRepeatRate = CONFIG_DEBOUNCER_keyRepeatRate; // ms
+    const uint32_t default_keyDelay      = CONFIG_DEBOUNCER_keyDelay;      // ms
+#else
+    const uint32_t default_thrPressed    = 5;   // ticks
+    const uint32_t default_thrReleased   = 5;   // ticks
+    const uint32_t default_updateTime    = 5;   // ms
+    const uint32_t default_minKeyPress   = 50;  // ms
+    const uint32_t default_keyRepeatRate = 50;  // ms
+    const uint32_t default_keyDelay      = 500; // ms
+#endif
 
 Debouncer::Debouncer(void)
 {
@@ -37,6 +50,8 @@ Debouncer::Debouncer(void)
     thrReleased = default_thrReleased;
 
     updateTime    = default_updateTime;
+
+    minKeyPress   = default_minKeyPress;
     keyDelay      = default_keyDelay;
     keyRepeatRate = default_keyRepeatRate;
 }
@@ -143,11 +158,15 @@ uint32_t Debouncer::GetCurrentPressCount(void)
     uint32_t res;
     res = updateTime * counterPressed;
 
-    if (res < keyDelay) {
+    if (res < minKeyPress) {
         return 0;
     }
 
     if (keyRepeatRate == 0) {
+        return 1;
+    }
+
+    if (res <= keyDelay) {
         return 1;
     }
 

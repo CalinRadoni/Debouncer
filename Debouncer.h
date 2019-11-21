@@ -118,6 +118,8 @@ protected:
     uint32_t thrReleased;
 
     uint32_t updateTime;
+
+    uint32_t minKeyPress;
     uint32_t keyDelay;
     uint32_t keyRepeatRate;
 };

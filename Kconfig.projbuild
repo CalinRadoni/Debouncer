@@ -1,0 +1,54 @@
+menu "Debouncer"
+
+    config DEBOUNCER_thrPressed
+        int "Ticks to change state to pressed"
+        range 2 100
+        default 5
+        help
+            A tick is a call to the Debouncer.Update function.
+
+            DEBOUNCER_thrPressed is the number of ticks that will change the state from released to pressed.
+            5 should be a good value for tick between 2 to 10 ms.
+
+    config DEBOUNCER_thrReleased
+        int "Ticks to change state to released"
+        range 2 100
+        default 5
+        help
+            A tick is a call to the Debouncer.Update function.
+
+            DEBOUNCER_thrReleased is the number of ticks that will change the state from pressed to released.
+            5 should be a good value for tick between 2 to 10 ms.
+
+    config DEBOUNCER_updateTime
+        int "Time [ms] between two calls of update function"
+        range 1 20
+        default 5
+        help
+            The Debouncer.Update function should be called periodically, from a timer.
+
+            DEBOUNCER_updateTime is the ime between two calls of the Debouncer.Update function, also beeing the tick duration.
+            5 should be a good value.
+
+    config DEBOUNCER_minKeyPress
+        int "Minimum time [ms] to consider a key press"
+        range 10 1000
+        default 50
+        help
+            Minimum time [ms] to consider a key press. 30 - 60 ms should be good.
+
+    config DEBOUNCER_keyRepeatRate
+        int "Time after which a pressed key "
+        range 10 1000
+        default 50
+        help
+            After holding a key pressed for DEBOUNCER_keyDelay the key starts repeating itself every DEBOUNCER_keyRepeatRate ms.
+
+    config DEBOUNCER_keyDelay
+        int "The time [ms] after which key repeat begins"
+        range 10 1000
+        default 500
+        help
+            The time [ms] between pressing a key and the moment when it starts repeating.
+
+endmenu
