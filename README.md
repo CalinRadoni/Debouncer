@@ -1,13 +1,15 @@
-# Helper component for button debouncing
+# Helper class for button debouncing
 
-This component uses a counting algorithm.
+This class uses a counting algorithm.
 I think that it is more "safe" then other algorithms.
 
 In the first implementation I have used a history based algorithm like the one described in [Embed With Elliot: Debounce Your Noisy Buttons, Part II](https://hackaday.com/2015/12/10/embed-with-elliot-debounce-your-noisy-buttons-part-ii/)
 
 ## Dependencies
 
-[Espressif IoT Development Framework](https://github.com/espressif/esp-idf).
+This should be platform and compiler agnostic but:
+
+- If used with `esp-idf`, [Espressif IoT Development Framework](https://github.com/espressif/esp-idf).
 
 ## Development Environment
 
