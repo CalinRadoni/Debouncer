@@ -18,9 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "Debouncer.h"
 
-#define USE_Kconfig
-
-#ifdef USE_Kconfig
+#ifdef ESP_PLATFORM
     #include "sdkconfig.h"
 
     const uint32_t default_thrPressed    = CONFIG_DEBOUNCER_thrPressed;    // ticks
