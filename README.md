@@ -5,6 +5,12 @@ I think that it is more "safe" then other algorithms.
 
 In the first implementation I have used a history based algorithm like the one described in [Embed With Elliot: Debounce Your Noisy Buttons, Part II](https://hackaday.com/2015/12/10/embed-with-elliot-debounce-your-noisy-buttons-part-ii/)
 
+## Files
+
+- the implementation is in the `Debouncer.h` and `Debouncer.cpp` fles.
+- `CMakeLists.txt` and `Kconfig.projbuild` are only for `esp-idf`
+- `build.sh` is used to build and run the `example` executable, manually or by Travis CI
+
 ## Dependencies
 
 This should be platform and compiler agnostic but:
