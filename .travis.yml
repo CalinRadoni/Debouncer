@@ -1,0 +1,9 @@
+dist: xenial
+compiler: gcc
+language: cpp
+
+script: ./build.sh
+
+branches:
+  only:
+  - master
