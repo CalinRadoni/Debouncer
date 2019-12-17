@@ -1,5 +1,7 @@
 # Helper class for button debouncing
 
+[![Build Status](https://travis-ci.com/CalinRadoni/Debouncer.svg?branch=master)](https://travis-ci.com/CalinRadoni/Debouncer)
+
 This class uses a counting algorithm.
 I think that it is more "safe" then other algorithms.
 
