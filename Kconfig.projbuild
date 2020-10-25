@@ -38,7 +38,7 @@ menu "Debouncer"
             Minimum time [ms] to consider a key press. 30 - 60 ms should be good.
 
     config DEBOUNCER_keyRepeatRate
-        int "Time after which a pressed key "
+        int "Time after which a pressed key repeats itself"
         range 10 1000
         default 50
         help
